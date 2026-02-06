@@ -41,5 +41,5 @@ echo "🌐 Pushing to GitHub..."
 git push origin main
 
 echo -e "${GREEN}✅ Deployment complete! Site will be updated at:${NC}"
-echo -e "${GREEN}   https://gim-home.github.io/Outlook_AAA_Motion_Lab/${NC}"
+echo -e "${GREEN}   https://potential-carnival-o7eemy3.pages.github.io/${NC}"
 echo -e "${BLUE}⏱️  GitHub Pages typically updates within 2-5 minutes${NC}"

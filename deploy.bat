@@ -39,6 +39,6 @@ git push origin main
 
 echo.
 echo ✅ Deployment complete! Site will be updated at:
-echo    https://gim-home.github.io/Outlook_AAA_Motion_Lab/
+echo    https://potential-carnival-o7eemy3.pages.github.io/
 echo ⏱️  GitHub Pages typically updates within 2-5 minutes
 echo.
