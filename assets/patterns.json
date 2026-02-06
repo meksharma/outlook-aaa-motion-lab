@@ -1,0 +1,1591 @@
+{
+  "patterns": [
+    {
+      "id": "context-preserving-push",
+      "name": "Context-Preserving Push",
+      "category": "navigation",
+      "tags": ["navigation", "gesture", "hierarchy"],
+      "platforms": ["ios", "ipados", "macos"],
+
+      "feelsLike": "The current view slides aside while the new view slides in from the right, maintaining spatial context.",
+
+      "useWhen": [
+        "Navigating deeper into a hierarchy (e.g., list → detail)",
+        "User expects to return to the previous context"
+      ],
+
+      "motionTerms": [
+        "spring animation",
+        "interactive gesture-driven",
+        "parallax layering",
+        "context preservation",
+        "interruptible transition",
+        "navigation stack"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.5,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.85,
+          "unit": ""
+        },
+        {
+          "name": "parallaxOffset",
+          "label": "Parallax Offset",
+          "type": "range",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "default": 30,
+          "unit": "%"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a navigation push transition in SwiftUI with:\n- Spring animation (damping: 0.85, response: 0.35)\n- The outgoing view translates left by 30% with slight opacity fade to 0.8\n- The incoming view slides from the right edge (100% → 0%)\n- Support interactive swipe-back gesture using simultaneousGesture\n- Use matchedGeometryEffect for any shared elements like navigation bar titles\n- Make the transition interruptible mid-animation\n- Add subtle shadow on the incoming view for depth",
+
+        "web": "Create a navigation push transition in HTML/CSS/JS with:\n- CSS transition using cubic-bezier(0.2, 0.8, 0.2, 1) for spring-like feel\n- Duration: 350ms\n- Outgoing view: translateX(-30%) with opacity 0.8\n- Incoming view: translateX(100%) → translateX(0)\n- Add box-shadow: -4px 0 20px rgba(0,0,0,0.1) on incoming view\n- Use will-change: transform for performance\n- Add touch gesture support using touchstart/touchmove/touchend for swipe-back\n- Use transform3d for GPU acceleration"
+      },
+
+      "demoId": "navigation-push"
+    },
+
+    {
+      "id": "navigation-pop",
+      "name": "Navigation Pop",
+      "category": "navigation",
+      "tags": ["navigation", "gesture", "back"],
+      "platforms": ["ios", "ipados", "macos"],
+
+      "feelsLike": "The current view slides away to the right while the previous view slides back in from the left, restoring context.",
+
+      "useWhen": [
+        "User taps back button or swipes from left edge",
+        "Returning to a previous level in hierarchy"
+      ],
+
+      "motionTerms": [
+        "spring animation",
+        "edge swipe gesture",
+        "parallax restoration",
+        "velocity-based completion",
+        "gesture-driven dismissal",
+        "navigation stack pop"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.5,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.85,
+          "unit": ""
+        },
+        {
+          "name": "gestureThreshold",
+          "label": "Gesture Threshold",
+          "type": "range",
+          "min": 20,
+          "max": 60,
+          "step": 5,
+          "default": 40,
+          "unit": "%"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a navigation pop transition in SwiftUI with:\n- Spring animation (damping: 0.85, response: 0.35)\n- The current view slides out to the right (0% → 100%)\n- The previous view slides in from -30% to 0% with opacity 0.8 → 1.0\n- Support interactive edge swipe gesture from left\n- Use gesture velocity to determine animation completion threshold\n- If gesture ends past 40% threshold, complete the pop; otherwise, cancel and spring back\n- Match the system NavigationView behavior",
+
+        "web": "Create a navigation pop transition in HTML/CSS/JS with:\n- CSS transition using cubic-bezier(0.2, 0.8, 0.2, 1) for spring-like feel\n- Duration: 350ms\n- Current view: translateX(0) → translateX(100%)\n- Previous view: translateX(-30%) opacity 0.8 → translateX(0) opacity 1\n- Implement touch gesture on left edge (first 20px)\n- Track gesture velocity to determine completion\n- Use 40% screen width as threshold for completing vs canceling\n- Add box-shadow on departing view for depth"
+      },
+
+      "demoId": "navigation-pop"
+    },
+
+    {
+      "id": "bottom-sheet-present",
+      "name": "Bottom Sheet Present",
+      "category": "modals",
+      "tags": ["sheet", "modal", "overlay"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "A panel rises from the bottom with a gentle spring, dimming the content behind it.",
+
+      "useWhen": [
+        "Presenting secondary content that doesn't require full attention",
+        "Showing options, filters, or actions related to current context"
+      ],
+
+      "motionTerms": [
+        "spring animation",
+        "scrim/backdrop fade",
+        "detent stops",
+        "drag-to-dismiss",
+        "rubber-banding",
+        "interactive presentation"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.6,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.8,
+          "unit": ""
+        },
+        {
+          "name": "backdropOpacity",
+          "label": "Backdrop Opacity",
+          "type": "range",
+          "min": 0.1,
+          "max": 0.6,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a bottom sheet presentation in SwiftUI with:\n- Use .sheet or custom presentationDetents([.medium, .large])\n- Spring animation (damping: 0.8, response: 0.35)\n- Sheet slides up from bottom: translateY(100%) → translateY(0)\n- Background dims to 30% black with 300ms fade\n- Add grab handle (pill indicator) at top of sheet\n- Support drag-to-dismiss with velocity-based completion\n- Add rubber-banding effect when dragging beyond bounds\n- Include presentationDragIndicator(.visible)",
+
+        "web": "Create a bottom sheet in HTML/CSS/JS with:\n- Sheet container: position fixed, bottom 0, left 0, right 0\n- Transform: translateY(100%) → translateY(0)\n- Transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Backdrop: position fixed, inset 0, background rgba(0,0,0,0.3)\n- Backdrop fade: opacity 0 → 1, 300ms ease-out\n- Add 36px wide × 5px tall grab handle with border-radius\n- Implement touch drag on handle for dismiss\n- Add overscroll rubber-band effect using transform\n- Border-radius: 16px 16px 0 0"
+      },
+
+      "demoId": "bottom-sheet"
+    },
+
+    {
+      "id": "card-expand",
+      "name": "Card → Full Screen Expand",
+      "category": "modals",
+      "tags": ["expand", "hero", "matched-geometry"],
+      "platforms": ["ios", "ipados", "android", "macos"],
+
+      "feelsLike": "The card smoothly grows and morphs into a full-screen view, maintaining visual continuity.",
+
+      "useWhen": [
+        "Transitioning from a preview card to detailed content",
+        "Creating a sense of diving deeper into content"
+      ],
+
+      "motionTerms": [
+        "matched geometry effect",
+        "hero transition",
+        "container transform",
+        "shared element transition",
+        "morphing bounds",
+        "cross-fade content"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.45,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.85,
+          "unit": ""
+        },
+        {
+          "name": "cornerRadiusStart",
+          "label": "Corner Radius (Start)",
+          "type": "range",
+          "min": 4,
+          "max": 24,
+          "step": 2,
+          "default": 12,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a card-to-fullscreen expand transition in SwiftUI with:\n- Use matchedGeometryEffect(id:namespace:) for shared container\n- Spring animation (damping: 0.85, response: 0.45)\n- Card morphs from its original position and size to full screen\n- Corner radius animates: 12px → 0px (or device corner radius)\n- Content inside cross-fades: card content fades out, detail content fades in\n- Add .zIndex modifier to keep expanding card above others\n- Support interactive dismiss with drag gesture\n- Use @Namespace for geometry matching",
+
+        "web": "Create a card-to-fullscreen expand in HTML/CSS/JS with:\n- Capture card's getBoundingClientRect() on click\n- Clone card or use FLIP animation technique\n- Animate from original rect to: top 0, left 0, width 100vw, height 100vh\n- Transition: all 450ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Border-radius transition: 12px → 0px\n- Cross-fade inner content using opacity transitions\n- Add backdrop blur on content behind (filter: blur(10px))\n- Use position: fixed during transition"
+      },
+
+      "demoId": "card-expand"
+    },
+
+    {
+      "id": "glass-header-collapse",
+      "name": "Glass Header Collapse",
+      "category": "material",
+      "tags": ["glass", "scroll", "material", "blur"],
+      "platforms": ["ios", "ipados", "macos"],
+
+      "feelsLike": "The header smoothly transitions between states as you scroll, with glass material becoming more defined.",
+
+      "useWhen": [
+        "Large title navigation bars that collapse on scroll",
+        "Headers that need to show/hide content based on scroll position"
+      ],
+
+      "motionTerms": [
+        "scroll-driven animation",
+        "material transition",
+        "backdrop blur",
+        "vibrancy effect",
+        "progressive disclosure",
+        "collapsing header"
+      ],
+
+      "parameters": [
+        {
+          "name": "collapseThreshold",
+          "label": "Collapse Threshold",
+          "type": "range",
+          "min": 40,
+          "max": 120,
+          "step": 10,
+          "default": 60,
+          "unit": "px"
+        },
+        {
+          "name": "blurAmount",
+          "label": "Blur Amount",
+          "type": "range",
+          "min": 5,
+          "max": 30,
+          "step": 5,
+          "default": 20,
+          "unit": "px"
+        },
+        {
+          "name": "materialOpacity",
+          "label": "Material Opacity",
+          "type": "range",
+          "min": 0.5,
+          "max": 0.95,
+          "step": 0.05,
+          "default": 0.8,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a collapsing glass header in SwiftUI with:\n- Use ScrollView with .coordinateSpace and GeometryReader to track scroll offset\n- Large title state: height 96pt, large font, clear background\n- Collapsed state: height 44pt, standard font, .ultraThinMaterial background\n- Animate between states based on scroll offset threshold (60pt)\n- Apply .blur(radius:) or Material for glass effect\n- Use linear interpolation for smooth property transitions\n- Add .safeAreaInset for proper content layout\n- Match iOS 15+ large title navigation bar behavior",
+
+        "web": "Create a collapsing glass header in HTML/CSS/JS with:\n- Header: position sticky, top 0\n- Track scroll position with IntersectionObserver or scroll event\n- Expanded: height 96px, padding 16px, font-size 32px\n- Collapsed: height 44px, padding 12px, font-size 17px\n- Glass effect: backdrop-filter: blur(20px); background: rgba(255,255,255,0.8)\n- Transition: all 300ms ease-out\n- Use CSS custom properties for dynamic values\n- Calculate interpolation: progress = Math.min(scrollY / 60, 1)\n- Add border-bottom that fades in when collapsed"
+      },
+
+      "demoId": "glass-header"
+    },
+
+    {
+      "id": "tab-switch",
+      "name": "Tab Switch Indicator",
+      "category": "navigation",
+      "tags": ["tabs", "indicator", "selection"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "The selection indicator slides smoothly under the newly selected tab, with labels subtly transitioning.",
+
+      "useWhen": [
+        "Switching between top-level sections or content types",
+        "Tab bars, segmented controls, or filter toggles"
+      ],
+
+      "motionTerms": [
+        "sliding indicator",
+        "spring animation",
+        "selection highlight",
+        "label emphasis transition",
+        "underline animation",
+        "segment morph"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.15,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.25,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.8,
+          "unit": ""
+        },
+        {
+          "name": "indicatorHeight",
+          "label": "Indicator Height",
+          "type": "range",
+          "min": 2,
+          "max": 6,
+          "step": 1,
+          "default": 3,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a tab switch indicator in SwiftUI with:\n- HStack of tab buttons with equal spacing\n- Selection indicator view positioned below/behind tabs\n- Use matchedGeometryEffect to animate indicator position and width\n- Spring animation (damping: 0.8, response: 0.25)\n- Selected tab label: bold weight, accent color\n- Unselected tab labels: regular weight, secondary color\n- Animate font weight change with .animation modifier\n- Indicator can be underline, pill background, or full highlight",
+
+        "web": "Create a tab switch indicator in HTML/CSS/JS with:\n- Tab bar container: display flex, position relative\n- Indicator element: position absolute, bottom 0\n- Calculate indicator left position based on selected tab offsetLeft\n- Calculate indicator width based on selected tab offsetWidth\n- Transition: left 250ms cubic-bezier(0.2, 0.8, 0.2, 1), width 250ms\n- Active tab: color: accent, font-weight: 600\n- Inactive tabs: color: #666, font-weight: 400\n- Use CSS transition for color and font-weight changes\n- Indicator: height 3px, border-radius 1.5px, background: accent"
+      },
+
+      "demoId": "tab-switch"
+    },
+
+    {
+      "id": "button-press",
+      "name": "Button Press Micro-interaction",
+      "category": "micro",
+      "tags": ["button", "press", "feedback", "haptic"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "The button responds instantly to touch with a subtle scale and highlight, confirming the interaction.",
+
+      "useWhen": [
+        "Any tappable button or control",
+        "Providing immediate feedback before action completes"
+      ],
+
+      "motionTerms": [
+        "scale transform",
+        "highlight state",
+        "press feedback",
+        "haptic response",
+        "active state",
+        "touch feedback"
+      ],
+
+      "parameters": [
+        {
+          "name": "scaleAmount",
+          "label": "Scale Amount",
+          "type": "range",
+          "min": 0.9,
+          "max": 0.99,
+          "step": 0.01,
+          "default": 0.96,
+          "unit": ""
+        },
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.05,
+          "max": 0.2,
+          "step": 0.01,
+          "default": 0.1,
+          "unit": "s"
+        },
+        {
+          "name": "highlightOpacity",
+          "label": "Highlight Opacity",
+          "type": "range",
+          "min": 0.05,
+          "max": 0.3,
+          "step": 0.05,
+          "default": 0.1,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a button press micro-interaction in SwiftUI with:\n- Use custom ButtonStyle for consistent behavior\n- On press: scale to 0.96 with spring animation (response: 0.1, damping: 0.8)\n- Add subtle opacity change or highlight overlay\n- Use .sensoryFeedback(.impact(weight: .light)) for haptic on iOS 17+\n- Or use UIImpactFeedbackGenerator for older iOS\n- Spring back to scale 1.0 on release\n- Keep animation fast (<100ms) for responsive feel\n- Consider adding subtle shadow reduction on press",
+
+        "web": "Create a button press micro-interaction in HTML/CSS/JS with:\n- Default state: transform: scale(1)\n- Pressed state (:active): transform: scale(0.96)\n- Transition: transform 100ms ease-out\n- Add background-color change or box-shadow: inset 0 2px 4px rgba(0,0,0,0.1)\n- Use will-change: transform for smooth animation\n- Consider adding subtle filter: brightness(0.95) on press\n- For touch devices, use touchstart/touchend for immediate response\n- Add outline offset for focus state accessibility"
+      },
+
+      "demoId": "button-press"
+    },
+
+    {
+      "id": "context-menu",
+      "name": "Context Menu Reveal",
+      "category": "micro",
+      "tags": ["menu", "overlay", "scale", "popup"],
+      "platforms": ["ios", "ipados", "macos", "web"],
+
+      "feelsLike": "The menu appears from the tap point with a quick scale and fade, feeling connected to the trigger.",
+
+      "useWhen": [
+        "Long-press or right-click context menus",
+        "Overflow menus from icon buttons"
+      ],
+
+      "motionTerms": [
+        "scale from origin",
+        "spring entrance",
+        "fade in",
+        "blur backdrop",
+        "zoom reveal",
+        "contextual positioning"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.1,
+          "max": 0.4,
+          "step": 0.05,
+          "default": 0.2,
+          "unit": "s"
+        },
+        {
+          "name": "startScale",
+          "label": "Start Scale",
+          "type": "range",
+          "min": 0.8,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.95,
+          "unit": ""
+        },
+        {
+          "name": "backdropBlur",
+          "label": "Backdrop Blur",
+          "type": "range",
+          "min": 0,
+          "max": 20,
+          "step": 2,
+          "default": 10,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a context menu reveal in SwiftUI with:\n- Use .contextMenu modifier for system behavior, or custom implementation\n- Menu appears with scale from 0.95 → 1.0 + opacity 0 → 1\n- Spring animation (damping: 0.85, response: 0.2)\n- Transform origin at tap point (top-left, center, etc. based on position)\n- Background dims slightly with ultraThinMaterial blur\n- Add subtle shadow: radius 20, opacity 0.15\n- Use .matchedGeometryEffect to connect menu to trigger\n- Dismiss with reverse animation",
+
+        "web": "Create a context menu reveal in HTML/CSS/JS with:\n- Menu container: position fixed, opacity 0, transform: scale(0.95)\n- Calculate position based on click/touch coordinates\n- Adjust position to stay within viewport bounds\n- Transition: opacity 200ms ease-out, transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Active state: opacity 1, transform: scale(1)\n- Set transform-origin dynamically based on menu position\n- Add backdrop: position fixed, inset 0, backdrop-filter: blur(10px)\n- Add box-shadow: 0 8px 30px rgba(0,0,0,0.12)"
+      },
+
+      "demoId": "context-menu"
+    },
+
+    {
+      "id": "toast-reveal",
+      "name": "Toast / Snackbar Reveal",
+      "category": "loading",
+      "tags": ["toast", "snackbar", "notification", "feedback"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "A notification slides in gently from the edge, pauses to be read, then slides away.",
+
+      "useWhen": [
+        "Confirming an action completed successfully",
+        "Showing non-critical information that auto-dismisses"
+      ],
+
+      "motionTerms": [
+        "slide in",
+        "spring animation",
+        "auto-dismiss",
+        "timed display",
+        "edge entrance",
+        "fade out"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Animation Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": "s"
+        },
+        {
+          "name": "displayTime",
+          "label": "Display Time",
+          "type": "range",
+          "min": 2,
+          "max": 6,
+          "step": 0.5,
+          "default": 3,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 1.0,
+          "step": 0.05,
+          "default": 0.8,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a toast/snackbar reveal in SwiftUI with:\n- Toast positioned at bottom with safe area inset\n- Entrance: translateY(100px) opacity(0) → translateY(0) opacity(1)\n- Spring animation (damping: 0.8, response: 0.3)\n- Auto-dismiss after 3 seconds using Task.sleep or Timer\n- Exit animation: reverse of entrance (slide down + fade)\n- Support swipe-to-dismiss gesture\n- Use .transition(.move(edge: .bottom).combined(with: .opacity))\n- Add subtle shadow and rounded corners (12px)",
+
+        "web": "Create a toast/snackbar in HTML/CSS/JS with:\n- Toast container: position fixed, bottom 24px, left 50%, translateX(-50%)\n- Initial state: transform: translateY(100px), opacity: 0\n- Visible state: transform: translateY(0), opacity: 1\n- Transition: all 300ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Auto-dismiss: setTimeout to remove after 3000ms\n- Use requestAnimationFrame for smooth entrance\n- Background: #333 or themed color, color: white\n- Border-radius: 8px, padding: 12px 24px\n- Add box-shadow for elevation"
+      },
+
+      "demoId": "toast-reveal"
+    },
+
+    {
+      "id": "skeleton-shimmer",
+      "name": "Skeleton Loading Shimmer",
+      "category": "loading",
+      "tags": ["skeleton", "loading", "shimmer", "placeholder"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "Placeholder shapes pulse with a subtle shimmer, indicating content is on its way.",
+
+      "useWhen": [
+        "Content is loading and layout is known",
+        "Reducing perceived wait time with visual activity"
+      ],
+
+      "motionTerms": [
+        "shimmer animation",
+        "gradient sweep",
+        "skeleton placeholder",
+        "loading state",
+        "content placeholder",
+        "progressive loading"
+      ],
+
+      "parameters": [
+        {
+          "name": "shimmerDuration",
+          "label": "Shimmer Duration",
+          "type": "range",
+          "min": 1,
+          "max": 3,
+          "step": 0.25,
+          "default": 1.5,
+          "unit": "s"
+        },
+        {
+          "name": "baseColor",
+          "label": "Base Brightness",
+          "type": "range",
+          "min": 0.85,
+          "max": 0.98,
+          "step": 0.01,
+          "default": 0.94,
+          "unit": ""
+        },
+        {
+          "name": "highlightColor",
+          "label": "Highlight Brightness",
+          "type": "range",
+          "min": 0.9,
+          "max": 1.0,
+          "step": 0.01,
+          "default": 0.98,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a skeleton shimmer loading state in SwiftUI with:\n- Placeholder shapes matching expected content layout\n- Base color: Color.gray.opacity(0.2) or systemGray5\n- Shimmer: gradient overlay that animates left to right\n- Use LinearGradient with clear → white → clear stops\n- Animate gradient position using withAnimation(.linear(duration: 1.5).repeatForever)\n- Apply .mask() to limit shimmer to placeholder shapes\n- Round corners to match expected content (8px for text, 50% for avatars)\n- Consider using .redacted(reason: .placeholder) modifier",
+
+        "web": "Create a skeleton shimmer in HTML/CSS/JS with:\n- Placeholder elements with background: #f0f0f0\n- Shimmer: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)\n- Background-size: 200% 100%\n- Animation: shimmer 1.5s infinite linear\n- @keyframes shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }\n- Match shapes to expected content (round avatars, text-width rectangles)\n- Add border-radius: 4px for text lines, 50% for avatars\n- Use CSS custom properties for easy theming"
+      },
+
+      "demoId": "skeleton-shimmer"
+    },
+
+    {
+      "id": "ai-panel-reveal",
+      "name": "AI Panel Reveal",
+      "category": "modals",
+      "tags": ["AI", "assistant", "panel", "spring"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "An assistive panel rises calmly into view with a soft spring, feeling helpful rather than intrusive.",
+
+      "useWhen": [
+        "Showing AI suggestions, Copilot panels, or smart assists",
+        "Presenting helpful content that shouldn't demand attention"
+      ],
+
+      "motionTerms": [
+        "calm spring",
+        "assistive entrance",
+        "non-intrusive reveal",
+        "soft overshoot",
+        "gentle presentation",
+        "elevated panel"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.7,
+          "step": 0.05,
+          "default": 0.5,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.5,
+          "max": 0.9,
+          "step": 0.05,
+          "default": 0.7,
+          "unit": ""
+        },
+        {
+          "name": "overshoot",
+          "label": "Overshoot",
+          "type": "range",
+          "min": 0,
+          "max": 20,
+          "step": 2,
+          "default": 8,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an AI panel reveal in SwiftUI with:\n- Panel slides up from bottom or side\n- Use spring animation with low damping for gentle overshoot (damping: 0.7, response: 0.5)\n- The panel should feel calm and non-urgent\n- Entrance: translateY(100%) → translateY(0) with 8px overshoot\n- Add subtle shadow: radius 16, y offset -4, opacity 0.1\n- Optional: slight blur on background (3-5px) to focus attention\n- Include AI indicator (sparkle icon, gradient accent)\n- Support dismiss gesture with velocity-based completion",
+
+        "web": "Create an AI panel reveal in HTML/CSS/JS with:\n- Panel: position fixed, bottom 0, width 100% or sidebar width\n- Transform: translateY(100%) → translateY(0)\n- Use cubic-bezier(0.34, 1.56, 0.64, 1) for gentle overshoot spring\n- Duration: 500ms\n- Add box-shadow: 0 -8px 30px rgba(0,0,0,0.08)\n- Optional backdrop: filter blur(5px) on content behind\n- Include gradient accent or AI icon for branding\n- Add touch gesture for dismiss\n- Consider prefers-reduced-motion: use simple fade instead"
+      },
+
+      "demoId": "ai-panel"
+    },
+
+    {
+      "id": "content-crossfade",
+      "name": "Crossfade Between Content States",
+      "category": "content",
+      "tags": ["crossfade", "state", "loading", "transition"],
+      "platforms": ["ios", "ipados", "android", "macos", "web"],
+
+      "feelsLike": "Content smoothly dissolves between states, with no jarring jumps or flashes.",
+
+      "useWhen": [
+        "Transitioning from loading skeleton to real content",
+        "Switching between empty state and populated state"
+      ],
+
+      "motionTerms": [
+        "crossfade transition",
+        "opacity blend",
+        "state transition",
+        "dissolve",
+        "content swap",
+        "fade through"
+      ],
+
+      "parameters": [
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.15,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": "s"
+        },
+        {
+          "name": "overlap",
+          "label": "Overlap",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "scaleEffect",
+          "label": "Scale Effect",
+          "type": "range",
+          "min": 0.95,
+          "max": 1.0,
+          "step": 0.01,
+          "default": 0.98,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create a crossfade content transition in SwiftUI with:\n- Use .transition(.opacity) or custom AnyTransition\n- Wrap state change in withAnimation(.easeOut(duration: 0.3))\n- Outgoing content: opacity 1 → 0, optional scale 1 → 0.98\n- Incoming content: opacity 0 → 1, optional scale 0.98 → 1\n- Use .animation(.easeOut, value: contentState) on container\n- Consider .contentTransition(.opacity) for Text changes\n- For complex views, use .id(stateIdentifier) to force refresh\n- Match Android's 'fade through' pattern for cross-platform consistency",
+
+        "web": "Create a crossfade content transition in HTML/CSS/JS with:\n- Container: position relative, overflow hidden\n- Both states: position absolute (or use CSS Grid stacking)\n- Outgoing: opacity 1 → 0, transform: scale(1) → scale(0.98)\n- Incoming: opacity 0 → 1, transform: scale(0.98) → scale(1)\n- Transition: opacity 300ms ease-out, transform 300ms ease-out\n- Use 50% overlap (incoming starts fading in at 150ms)\n- Alternative: sequential fade-out then fade-in\n- Add will-change: opacity for performance"
+      },
+
+      "demoId": "content-crossfade"
+    },
+
+    {
+      "id": "outlook-header-collapse",
+      "name": "Outlook Header Collapse",
+      "category": "outlook",
+      "tags": ["outlook", "header", "scroll", "liquid-glass", "title-hide"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "The large Outlook title smoothly shrinks and the header gains a glass blur effect as you scroll through mail.",
+
+      "useWhen": [
+        "User scrolls through mail list or email content",
+        "Header needs to transition from prominent to compact state"
+      ],
+
+      "motionTerms": [
+        "scroll-driven animation",
+        "liquid glass material",
+        "title cross-fade",
+        "progressive disclosure",
+        "backdrop blur transition",
+        "threshold-based animation"
+      ],
+
+      "parameters": [
+        {
+          "name": "scrollThreshold",
+          "label": "Scroll Threshold",
+          "type": "range",
+          "min": 40,
+          "max": 120,
+          "step": 10,
+          "default": 90,
+          "unit": "px"
+        },
+        {
+          "name": "blurIntensity",
+          "label": "Blur Intensity",
+          "type": "range",
+          "min": 10,
+          "max": 30,
+          "step": 2,
+          "default": 22,
+          "unit": "px"
+        },
+        {
+          "name": "titleFadeSpeed",
+          "label": "Title Fade Speed",
+          "type": "range",
+          "min": 120,
+          "max": 300,
+          "step": 20,
+          "default": 180,
+          "unit": "ms"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an Outlook header collapse in SwiftUI with:\n- Use ScrollView with GeometryReader to track scroll offset\n- Large title state: height 120pt, font size 30pt, clear background\n- Collapsed state: height 66pt, font size 17pt, .ultraThinMaterial background\n- Cross-fade between large title in content and compact title in header\n- Apply blur transition based on scroll threshold (90pt default)\n- Use linear interpolation: progress = min(scrollY / threshold, 1.0)\n- Animate with .animation(.easeOut(duration: 0.18), value: scrollOffset)",
+
+        "web": "Create an Outlook header collapse in HTML/CSS/JS with:\n- Header: position sticky, top 0, transitions between 120px and 66px height\n- Large title: font-size 30px, opacity 1 → 0 based on scroll\n- Header title: font-size 17px, opacity 0 → 1 based on scroll\n- Scroll threshold: 90px default, calculate progress = Math.min(scrollY / 90, 1)\n- Glass effect: backdrop-filter: blur(22px), background: rgba(255,255,255,0.7)\n- Smooth transition: all 180ms ease-out\n- Use requestAnimationFrame for smooth scroll tracking"
+      },
+
+      "demoId": "outlook-header"
+    },
+
+    {
+      "id": "outlook-footer-morph",
+      "name": "Outlook Footer Morphing",
+      "category": "outlook",
+      "tags": ["outlook", "footer", "nav", "morph", "copilot"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "The bottom navigation smoothly transforms between full pill and minimal state, with Copilot bar adapting.",
+
+      "useWhen": [
+        "User scrolls in mail list or email thread",
+        "Footer needs to become less prominent while reading"
+      ],
+
+      "motionTerms": [
+        "morphing transition",
+        "staggered icon collapse",
+        "liquid glass adaptation",
+        "scroll-triggered transformation",
+        "contextual UI scaling",
+        "unified footer system"
+      ],
+
+      "parameters": [
+        {
+          "name": "morphDuration",
+          "label": "Morph Duration",
+          "type": "range",
+          "min": 120,
+          "max": 300,
+          "step": 20,
+          "default": 180,
+          "unit": "ms"
+        },
+        {
+          "name": "staggerDelay",
+          "label": "Stagger Delay",
+          "type": "range",
+          "min": 20,
+          "max": 100,
+          "step": 10,
+          "default": 60,
+          "unit": "ms"
+        },
+        {
+          "name": "copilotWidth",
+          "label": "Copilot Bar Width",
+          "type": "range",
+          "min": 180,
+          "max": 280,
+          "step": 20,
+          "default": 220,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an Outlook footer morph in SwiftUI with:\n- Navigation bar morphs from 300pt pill to 54pt circle\n- Inactive nav items: scale(0.8) + translateY(20pt) + opacity(0)\n- Active nav item stays visible in circle container\n- Staggered animation with 60ms delay between items\n- Copilot bar width: 300pt → 220pt with center alignment\n- Use .animation(.easeOut(duration: 0.18), value: isMinimal)\n- Spring animation for morph: damping 0.8, response 0.18",
+
+        "web": "Create an Outlook footer morph in HTML/CSS/JS with:\n- Main nav: width 300px → 54px, border-radius 999px → 50%\n- Inactive nav items: transform: translateY(20px) scale(0.8), opacity: 0\n- Use CSS transition with staggered delays (60ms between items)\n- Copilot bar: width 100% → 220px, centered with transform: translateX(-50%)\n- Transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1)\n- Add transition-delay for stagger effect\n- Preserve glass backdrop-filter throughout morph"
+      },
+
+      "demoId": "outlook-footer"
+    },
+
+    {
+      "id": "outlook-compose-slide",
+      "name": "Outlook Compose Slide-Up",
+      "category": "outlook",
+      "tags": ["outlook", "compose", "sheet", "email-compose"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "A compose email sheet rises smoothly from the bottom with a gentle spring, feeling connected to the compose button.",
+
+      "useWhen": [
+        "User taps compose button to write new email",
+        "Creating or replying to emails in Outlook"
+      ],
+
+      "motionTerms": [
+        "connected animation",
+        "spring-driven sheet",
+        "compose presentation",
+        "bottom-anchored modal",
+        "gesture-dismissible",
+        "keyboard-aware layout"
+      ],
+
+      "parameters": [
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 0.9,
+          "step": 0.05,
+          "default": 0.75,
+          "unit": ""
+        },
+        {
+          "name": "duration",
+          "label": "Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.6,
+          "step": 0.05,
+          "default": 0.4,
+          "unit": "s"
+        },
+        {
+          "name": "backdropOpacity",
+          "label": "Backdrop Opacity",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an Outlook compose slide-up in SwiftUI with:\n- Present as .sheet with custom presentation\n- Sheet slides up from bottom: translateY(100%) → translateY(0)\n- Spring animation (damping: 0.75, response: 0.4)\n- Compose button scales down slightly during presentation\n- Background dims to 35% black overlay\n- Support drag-to-dismiss with velocity-based completion\n- Add rubber-banding when dragging beyond bounds\n- Include grab handle at top of compose sheet",
+
+        "web": "Create an Outlook compose slide-up in HTML/CSS/JS with:\n- Compose sheet: position fixed, bottom 0, height 80vh\n- Transform: translateY(100%) → translateY(0)\n- Transition: transform 400ms cubic-bezier(0.2, 0.75, 0.2, 1)\n- Backdrop: rgba(0,0,0,0.35) with 300ms fade\n- Compose button: transform: scale(0.95) during animation\n- Border-radius: 20px 20px 0 0 for sheet top\n- Add touch drag support for dismissal\n- Include visual grab handle indicator"
+      },
+
+      "demoId": "outlook-compose"
+    },
+
+    {
+      "id": "outlook-email-thread",
+      "name": "Outlook Email Thread Expand",
+      "category": "outlook",
+      "tags": ["outlook", "email", "thread", "expand", "mail"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "Individual emails in a thread gracefully expand to show full content with a smooth height animation.",
+
+      "useWhen": [
+        "User taps collapsed email in a thread to read full content",
+        "Expanding/collapsing emails within conversation view"
+      ],
+
+      "motionTerms": [
+        "height animation",
+        "content reveal",
+        "threaded expansion",
+        "staggered content loading",
+        "overflow transition",
+        "text reflow animation"
+      ],
+
+      "parameters": [
+        {
+          "name": "expandDuration",
+          "label": "Expand Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": "s"
+        },
+        {
+          "name": "contentDelay",
+          "label": "Content Fade Delay",
+          "type": "range",
+          "min": 50,
+          "max": 150,
+          "step": 25,
+          "default": 100,
+          "unit": "ms"
+        },
+        {
+          "name": "maxCollapsedHeight",
+          "label": "Collapsed Height",
+          "type": "range",
+          "min": 80,
+          "max": 120,
+          "step": 10,
+          "default": 90,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an Outlook email thread expand in SwiftUI with:\n- Email cards with dynamic height based on expanded state\n- Use .frame(maxHeight: isExpanded ? .infinity : 90) for height constraint\n- Content opacity: 0.6 → 1.0 with 100ms delay after expand starts\n- Smooth animation: .easeOut(duration: 0.3)\n- Add '···' show more button at bottom of collapsed emails\n- Support tap gesture to toggle expanded state\n- Consider using DisclosureGroup for native expansion behavior\n- Scroll to expanded email if needed with scrollTo()",
+
+        "web": "Create an Outlook email thread expand in HTML/CSS/JS with:\n- Email containers with max-height: 90px → auto transition\n- CSS transition: max-height 300ms ease-out, opacity 300ms ease-out\n- Content inside: opacity 0.6 → 1.0 with 100ms transition-delay\n- Show/hide 'Show more' button based on content height\n- Use scrollHeight to measure natural content height\n- Add overflow: hidden during transition\n- Implement smooth scrollIntoView() for expanded emails\n- Consider using ResizeObserver for dynamic content"
+      },
+
+      "demoId": "outlook-thread"
+    },
+
+    {
+      "id": "outlook-mail-swipe",
+      "name": "Outlook Mail Item Swipe Actions",
+      "category": "outlook",
+      "tags": ["outlook", "swipe", "mail", "actions", "list"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "Swiping a mail item reveals contextual actions with smooth elastic resistance, progressive reveal, and intelligent velocity-based completion.",
+
+      "useWhen": [
+        "User swipes mail items in the inbox for quick actions",
+        "Revealing primary actions: Flag, Archive, Delete in logical order",
+        "Providing tactile feedback with resistance and snap-back physics"
+      ],
+
+      "motionTerms": [
+        "elastic swipe gesture",
+        "progressive action reveal",
+        "rubber-band resistance physics",
+        "velocity-based gesture completion",
+        "staggered action animation",
+        "intelligent snap-back behavior"
+      ],
+
+      "parameters": [
+        {
+          "name": "swipeThreshold",
+          "label": "Action Threshold",
+          "type": "range",
+          "min": 60,
+          "max": 120,
+          "step": 10,
+          "default": 80,
+          "unit": "px"
+        },
+        {
+          "name": "snapBackSpeed",
+          "label": "Snap-Back Speed",
+          "type": "range",
+          "min": 0.15,
+          "max": 0.4,
+          "step": 0.05,
+          "default": 0.25,
+          "unit": "s"
+        },
+        {
+          "name": "actionWidth",
+          "label": "Action Button Width",
+          "type": "range",
+          "min": 50,
+          "max": 80,
+          "step": 5,
+          "default": 60,
+          "unit": "px"
+        },
+        {
+          "name": "resistanceStrength",
+          "label": "Resistance Strength",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.8,
+          "step": 0.1,
+          "default": 0.6,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create Outlook mail swipe actions in SwiftUI with:\n- Use .swipeActions(edge: .trailing) for native iOS behavior\n- Actions in order: Flag (orange), Archive (blue), Delete (red)\n- Custom DragGesture for elastic resistance: translate = swipe * (1 - abs(swipe)/maxSwipe)\n- Progressive action reveal with staggered scale animations\n- Velocity-based completion: threshold at 80pt OR velocity > 0.5pt/ms\n- Snap-back with spring(damping: 0.8, response: 0.25)\n- .sensoryFeedback(.impact) on threshold cross\n- Support both partial and full swipe interactions",
+
+        "web": "Create Outlook mail swipe actions in HTML/CSS/JS with:\n- Mail item with touch/mouse gesture tracking\n- Elastic resistance: translateX = deltaX * (1 - Math.abs(deltaX)/240)\n- Three actions behind: Flag (#FF8C00), Archive (#0078D4), Delete (#D83B01)\n- Progressive reveal: opacity and scale based on swipe distance\n- Velocity calculation: track movement over time for smart completion\n- Snap-back: transform 250ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Staggered action animations with 50ms delays\n- Touch-action: pan-y for vertical scroll preservation\n- Add navigator.vibrate(50) on threshold cross"
+      },
+
+      "demoId": "outlook-swipe"
+    },
+
+    {
+      "id": "outlook-calendar-transition",
+      "name": "Outlook Calendar View Transition",
+      "category": "outlook",
+      "tags": ["outlook", "calendar", "view", "transition", "schedule"],
+      "platforms": ["ios", "ipados", "android"],
+
+      "feelsLike": "Switching between calendar views feels like zooming into or out of time, with events morphing smoothly.",
+
+      "useWhen": [
+        "User switches between day, week, month, and year calendar views",
+        "Transitioning between different calendar perspectives"
+      ],
+
+      "motionTerms": [
+        "view transition",
+        "scale transformation",
+        "temporal zoom",
+        "event morphing",
+        "grid layout transition",
+        "shared element continuity"
+      ],
+
+      "parameters": [
+        {
+          "name": "transitionDuration",
+          "label": "Transition Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.7,
+          "step": 0.05,
+          "default": 0.45,
+          "unit": "s"
+        },
+        {
+          "name": "scaleEffect",
+          "label": "Scale Effect",
+          "type": "range",
+          "min": 0.8,
+          "max": 1.2,
+          "step": 0.05,
+          "default": 0.95,
+          "unit": ""
+        },
+        {
+          "name": "eventMorphSpeed",
+          "label": "Event Morph Speed",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.6,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "s"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create Outlook calendar view transition in SwiftUI with:\n- Use matchedGeometryEffect for shared events between views\n- Scale transition: day → week uses scale(1.2), week → month uses scale(0.8)\n- Events morph position and size with spring animation\n- Cross-fade non-shared elements (grid lines, headers)\n- Animation timing: .easeInOut(duration: 0.45)\n- Preserve selected date context across transitions\n- Use namespace for geometry matching\n- Consider TabView or custom view switching logic",
+
+        "web": "Create Outlook calendar view transition in HTML/CSS/JS with:\n- Calculate shared event positions between view states\n- Use FLIP animation technique for smooth event movement\n- Scale container: transform: scale(0.95) during transition\n- Events animate: position, width, height over 450ms\n- Timing: cubic-bezier(0.4, 0, 0.2, 1) for smooth easing\n- Cross-fade grid changes: opacity 0 → 1 with stagger\n- Use transform3d and will-change for GPU acceleration\n- Consider using CSS Grid layout transitions"
+      },
+
+      "demoId": "outlook-calendar"
+    },
+
+    {
+      "id": "ios-mail-pull-refresh",
+      "name": "iOS Mail Pull-to-Refresh",
+      "category": "loading",
+      "tags": ["refresh", "pull", "elastic", "mail", "ios"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "The classic iOS elastic pull gesture with a satisfying snap-back and spinning refresh indicator.",
+
+      "useWhen": [
+        "User pulls down on mail list or any scrollable content to refresh",
+        "Providing tactile feedback for manual refresh actions"
+      ],
+
+      "motionTerms": [
+        "elastic resistance",
+        "spring snap-back",
+        "threshold activation",
+        "circular progress indicator",
+        "rubber-band physics",
+        "velocity-aware release"
+      ],
+
+      "parameters": [
+        {
+          "name": "activationThreshold",
+          "label": "Activation Threshold",
+          "type": "range",
+          "min": 60,
+          "max": 120,
+          "step": 10,
+          "default": 80,
+          "unit": "px"
+        },
+        {
+          "name": "elasticResistance",
+          "label": "Elastic Resistance",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.8,
+          "step": 0.1,
+          "default": 0.6,
+          "unit": ""
+        },
+        {
+          "name": "snapBackDuration",
+          "label": "Snap-Back Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.6,
+          "step": 0.05,
+          "default": 0.35,
+          "unit": "s"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Mail pull-to-refresh in SwiftUI with:\n- Use UIViewRepresentable to wrap UIRefreshControl for native behavior\n- Or custom implementation with ScrollView + GeometryReader\n- Pull distance with elastic resistance: actualPull = pull * (1 - pull/maxPull)\n- Threshold activation at 80pt with subtle haptic feedback\n- Refresh indicator: rotating circle or Apple's activity indicator\n- Spring snap-back animation (damping: 0.7, response: 0.35)\n- Use @State for pull distance and isRefreshing state\n- Support .refreshable modifier on iOS 15+",
+
+        "web": "Create an iOS Mail pull-to-refresh in HTML/CSS/JS with:\n- Track touchstart/touchmove/touchend on scrollable container\n- Calculate pull distance with elastic resistance formula\n- Visual indicator: circular progress or spinning icon\n- Threshold: 80px default, add visual feedback at 60px\n- Snap-back: transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)\n- Use CSS custom properties for dynamic values\n- Add overflow-y: hidden during pull gesture\n- Support mouse drag for desktop testing"
+      },
+
+      "demoId": "ios-pull-refresh"
+    },
+
+    {
+      "id": "ios-mail-search-reveal",
+      "name": "iOS Mail Search Bar Reveal",
+      "category": "navigation",
+      "tags": ["search", "reveal", "scroll", "mail", "ios"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "The search bar smoothly slides down from the navigation bar as you pull down or tap search.",
+
+      "useWhen": [
+        "User pulls down to reveal search in mail list",
+        "Search functionality needs contextual reveal/hide behavior"
+      ],
+
+      "motionTerms": [
+        "pull-down reveal",
+        "height expansion",
+        "search bar transition",
+        "keyboard appearance sync",
+        "focus state animation",
+        "nav bar integration"
+      ],
+
+      "parameters": [
+        {
+          "name": "revealDuration",
+          "label": "Reveal Duration",
+          "type": "range",
+          "min": 0.2,
+          "max": 0.5,
+          "step": 0.05,
+          "default": 0.3,
+          "unit": "s"
+        },
+        {
+          "name": "searchBarHeight",
+          "label": "Search Bar Height",
+          "type": "range",
+          "min": 36,
+          "max": 56,
+          "step": 4,
+          "default": 44,
+          "unit": "px"
+        },
+        {
+          "name": "blurIntensity",
+          "label": "Background Blur",
+          "type": "range",
+          "min": 10,
+          "max": 30,
+          "step": 5,
+          "default": 20,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Mail search bar reveal in SwiftUI with:\n- Search bar positioned above ScrollView content\n- Height animates from 0 to 44pt with spring animation\n- Use .searchable modifier or custom TextField\n- Background: .ultraThinMaterial for glass effect\n- Reveal on scroll with GeometryReader offset tracking\n- Keyboard appearance synced with search bar animation\n- Auto-focus TextField when revealed\n- Animation: .spring(damping: 0.8, response: 0.3)",
+
+        "web": "Create an iOS Mail search bar reveal in HTML/CSS/JS with:\n- Search container: height 0 → 44px transition\n- Position: sticky at top of scroll container\n- Background: backdrop-filter blur(20px) + rgba overlay\n- Transform: translateY(-100%) → translateY(0)\n- Transition: all 300ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Auto-focus input field after animation completes\n- Track scroll direction for contextual hide/show\n- Add subtle border-bottom fade-in effect"
+      },
+
+      "demoId": "ios-search-reveal"
+    },
+
+    {
+      "id": "ios-calendar-event-creation",
+      "name": "iOS Calendar Quick Event Creation",
+      "category": "modals",
+      "tags": ["calendar", "event", "creation", "slide", "ios"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "A quick event creation panel slides up smoothly from the bottom with gentle spring physics.",
+
+      "useWhen": [
+        "User taps '+' button to create new calendar event",
+        "Quick event entry without full modal complexity"
+      ],
+
+      "motionTerms": [
+        "bottom slide presentation",
+        "spring physics",
+        "quick entry modal",
+        "keyboard-aware layout",
+        "connected animation",
+        "gesture dismissal"
+      ],
+
+      "parameters": [
+        {
+          "name": "slideUpDuration",
+          "label": "Slide Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.7,
+          "step": 0.05,
+          "default": 0.45,
+          "unit": "s"
+        },
+        {
+          "name": "springDamping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.6,
+          "max": 0.9,
+          "step": 0.05,
+          "default": 0.75,
+          "unit": ""
+        },
+        {
+          "name": "panelHeight",
+          "label": "Panel Height",
+          "type": "range",
+          "min": 280,
+          "max": 400,
+          "step": 20,
+          "default": 320,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Calendar event creation slide in SwiftUI with:\n- Present as custom sheet with height 320pt\n- Slide animation: translateY(100%) → translateY(0)\n- Spring animation (damping: 0.75, response: 0.45)\n- Form fields: Title, Date/Time, Location with native styling\n- Background: .regularMaterial for iOS glass effect\n- Support keyboard avoidance with .ignoresSafeArea(.keyboard)\n- Add drag indicator handle at top\n- Connect animation to + button with matchedGeometry",
+
+        "web": "Create an iOS Calendar event creation slide in HTML/CSS/JS with:\n- Panel: position fixed, bottom 0, height 320px\n- Transform: translateY(100%) → translateY(0)\n- Transition: transform 450ms cubic-bezier(0.2, 0.75, 0.2, 1)\n- Background: backdrop-filter blur(20px) + semi-transparent\n- Form styling: iOS-style inputs with rounded backgrounds\n- Border-radius: 20px 20px 0 0 for panel top\n- Include drag handle for touch dismissal\n- Add keyboard detection for layout adjustment"
+      },
+
+      "demoId": "ios-event-creation"
+    },
+
+    {
+      "id": "ios-mail-message-preview",
+      "name": "iOS Mail Message Preview Pop",
+      "category": "modals",
+      "tags": ["preview", "peek", "pop", "mail", "ios"],
+      "platforms": ["ios", "ipados", "web"],
+
+      "feelsLike": "A message preview card pops up with subtle scale and blur, offering a quick glimpse without full navigation.",
+
+      "useWhen": [
+        "User long-presses or force touches an email to preview",
+        "Quick content preview without losing current context"
+      ],
+
+      "motionTerms": [
+        "scale animation",
+        "depth preview",
+        "backdrop blur",
+        "pressure-sensitive",
+        "contextual preview",
+        "peek interaction"
+      ],
+
+      "parameters": [
+        {
+          "name": "scaleEffect",
+          "label": "Preview Scale",
+          "type": "range",
+          "min": 0.85,
+          "max": 0.95,
+          "step": 0.02,
+          "default": 0.9,
+          "unit": ""
+        },
+        {
+          "name": "previewDuration",
+          "label": "Preview Duration",
+          "type": "range",
+          "min": 0.15,
+          "max": 0.4,
+          "step": 0.05,
+          "default": 0.25,
+          "unit": "s"
+        },
+        {
+          "name": "backdropBlur",
+          "label": "Backdrop Blur",
+          "type": "range",
+          "min": 5,
+          "max": 20,
+          "step": 2,
+          "default": 12,
+          "unit": "px"
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Mail message preview pop in SwiftUI with:\n- Use contextMenu or custom long press gesture\n- Background content scales down to 0.9 with blur overlay\n- Preview card: shadow radius 20, opacity 0.3, rounded corners 16px\n- Animation: .spring(damping: 0.8, response: 0.25)\n- Preview shows: sender, subject, first few lines of content\n- Support 'Pop' action to open full message\n- Use .matchedGeometryEffect for smooth transition to full view\n- Add subtle haptic feedback on preview appear",
+
+        "web": "Create an iOS Mail message preview pop in HTML/CSS/JS with:\n- Trigger: long press or context menu on email item\n- Background: transform scale(0.9), filter blur(12px)\n- Preview card: position fixed, center screen, scale 0.95 → 1.0\n- Transition: all 250ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Card styling: border-radius 16px, box-shadow deep\n- Content: email preview with fade-out overflow\n- Dismiss: tap outside or escape key\n- Add backdrop click handler for dismissal"
+      },
+
+      "demoId": "ios-message-preview"
+    },
+
+    {
+      "id": "ios-calendar-today-bounce",
+      "name": "iOS Calendar Today Button Bounce",
+      "category": "micro",
+      "tags": ["today", "bounce", "calendar", "button", "ios"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "The 'Today' button gives satisfying feedback with a playful bounce when returning to current date.",
+
+      "useWhen": [
+        "User taps 'Today' button in calendar to return to current date",
+        "Any navigation button that returns to 'home' or current state"
+      ],
+
+      "motionTerms": [
+        "bounce animation",
+        "playful feedback",
+        "elastic overshoot",
+        "button response",
+        "satisfying interaction",
+        "return-to-current action"
+      ],
+
+      "parameters": [
+        {
+          "name": "bounceIntensity",
+          "label": "Bounce Intensity",
+          "type": "range",
+          "min": 1.05,
+          "max": 1.2,
+          "step": 0.02,
+          "default": 1.12,
+          "unit": ""
+        },
+        {
+          "name": "bounceDuration",
+          "label": "Bounce Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.8,
+          "step": 0.05,
+          "default": 0.5,
+          "unit": "s"
+        },
+        {
+          "name": "damping",
+          "label": "Spring Damping",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.7,
+          "step": 0.05,
+          "default": 0.5,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Calendar today button bounce in SwiftUI with:\n- Button scales to 1.12x on tap with spring animation\n- Use .scaleEffect modifier with @State variable\n- Spring animation: damping 0.5, response 0.5 for playful bounce\n- Add .sensoryFeedback(.impact) for haptic confirmation\n- Button highlights current date after animation\n- Consider combining with calendar scroll animation to today\n- Use .animation(.spring(damping: 0.5, response: 0.5)) modifier\n- Reset scale to 1.0 after bounce completes",
+
+        "web": "Create an iOS Calendar today button bounce in HTML/CSS/JS with:\n- Button: transform scale(1) → scale(1.12) → scale(1)\n- CSS animation: today-bounce 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55)\n- @keyframes: 0% scale(1), 50% scale(1.12), 100% scale(1)\n- Add active state styling during animation\n- Trigger on click with element.classList.add('bouncing')\n- Remove class after animation completes\n- Consider adding subtle box-shadow bounce\n- Use transform-origin: center for proper scaling"
+      },
+
+      "demoId": "ios-today-bounce"
+    },
+
+    {
+      "id": "ios-mail-thread-stack",
+      "name": "iOS Mail Thread Stack Collapse",
+      "category": "navigation",
+      "tags": ["thread", "stack", "collapse", "mail", "ios"],
+      "platforms": ["ios", "ipados", "android", "web"],
+
+      "feelsLike": "Multiple emails in a thread smoothly stack into a compact preview card with depth layering.",
+
+      "useWhen": [
+        "Collapsing email thread to show preview of multiple messages",
+        "Creating visual hierarchy for grouped content"
+      ],
+
+      "motionTerms": [
+        "stacking animation",
+        "depth layering",
+        "scale transition",
+        "thread collapse",
+        "card stacking",
+        "z-index choreography"
+      ],
+
+      "parameters": [
+        {
+          "name": "stackDuration",
+          "label": "Stack Duration",
+          "type": "range",
+          "min": 0.3,
+          "max": 0.7,
+          "step": 0.05,
+          "default": 0.45,
+          "unit": "s"
+        },
+        {
+          "name": "cardSpacing",
+          "label": "Card Spacing",
+          "type": "range",
+          "min": 2,
+          "max": 8,
+          "step": 1,
+          "default": 4,
+          "unit": "px"
+        },
+        {
+          "name": "scaleReduction",
+          "label": "Scale Reduction",
+          "type": "range",
+          "min": 0.02,
+          "max": 0.08,
+          "step": 0.01,
+          "default": 0.04,
+          "unit": ""
+        }
+      ],
+
+      "prompts": {
+        "swiftui": "Create an iOS Mail thread stack collapse in SwiftUI with:\n- Multiple email cards with decreasing scale and z-offset\n- Top card: scale 1.0, middle: 0.96, bottom: 0.92\n- Vertical offsets: 0pt, 4pt, 8pt for depth effect\n- Spring animation for stacking: damping 0.8, response 0.45\n- Use ZStack with .offset and .scaleEffect modifiers\n- Shadow opacity decreases for cards further back\n- Support tap to expand back to full thread\n- Use .matchedGeometryEffect for smooth card transitions",
+
+        "web": "Create an iOS Mail thread stack collapse in HTML/CSS/JS with:\n- Email cards positioned with decreasing transform: scale() and translateY()\n- Top card: scale(1) translateY(0), middle: scale(0.96) translateY(4px)\n- Transition: all 450ms cubic-bezier(0.2, 0.8, 0.2, 1)\n- Z-index stacking: top card highest, decreasing backwards\n- Box-shadow reduces opacity for depth effect\n- Use CSS transform-origin: center for proper scaling\n- Stagger animation delays by 50ms between cards\n- Support click to expand thread"
+      },
+
+      "demoId": "ios-thread-stack"
+    }
+  ],
+
+  "categories": [
+    { "id": "navigation", "label": "Navigation", "icon": "→" },
+    { "id": "modals", "label": "Modals & Sheets", "icon": "□" },
+    { "id": "micro", "label": "Micro-interactions", "icon": "•" },
+    { "id": "loading", "label": "Loading & Feedback", "icon": "◌" },
+    { "id": "material", "label": "Material & Glass", "icon": "◇" },
+    { "id": "content", "label": "Content Transitions", "icon": "↔" },
+    { "id": "outlook", "label": "Outlook Specific", "icon": "📧" }
+  ],
+
+  "platforms": [
+    { "id": "ios", "label": "iOS/iPadOS" },
+    { "id": "android", "label": "Android" },
+    { "id": "macos", "label": "macOS" },
+    { "id": "web", "label": "Web" }
+  ]
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Phrasebook — Outlook Design Team</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <!--
+    ============================================================
+    MOTION PHRASEBOOK
+    Internal learning tool for Outlook designers
+
+    How it works:
+    1. patterns.json defines all motion patterns
+    2. app.js renders the UI and handles interactions
+    3. demos/*.js contain the animation implementations
+    ============================================================
+    -->
+
+    <div class="app-container">
+        <!-- ============================================================
+             HEADER
+             Contains: Logo, Search, Reduced Motion Toggle
+             ============================================================ -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">
+                    <span class="logo-icon">◈</span>
+                    Motion Phrasebook
+                </h1>
+            </div>
+            <div class="header-center">
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="search-input"
+                        class="search-input"
+                        placeholder="Search patterns, terms, or tags..."
+                        aria-label="Search motion patterns"
+                    >
+                    <span class="search-icon">⌘K</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <label class="reduced-motion-toggle">
+                    <input
+                        type="checkbox"
+                        id="reduced-motion-toggle"
+                        aria-describedby="reduced-motion-desc"
+                    >
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Reduced Motion</span>
+                </label>
+                <span id="reduced-motion-desc" class="visually-hidden">
+                    When enabled, demos use fades instead of movement
+                </span>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- ============================================================
+                 SIDEBAR
+                 Contains: Platform Filters, Categories, Pattern List
+                 ============================================================ -->
+            <aside class="sidebar">
+
+                <!-- Categories -->
+                <section class="sidebar-section">
+                    <h2 class="sidebar-title">Categories</h2>
+                    <nav class="category-nav" id="category-nav">
+                        <!-- Populated by JavaScript -->
+                    </nav>
+                </section>
+
+                <!-- Pattern Count -->
+                <div class="sidebar-footer">
+                    <span id="pattern-count">0 patterns</span>
+                </div>
+            </aside>
+
+            <!-- ============================================================
+                 MAIN CONTENT
+                 Shows either: Home view OR Pattern detail view
+                 ============================================================ -->
+            <main class="main-content" id="main-content">
+                <!-- HOME VIEW (default) -->
+                <div id="home-view" class="view active">
+                    <!-- Welcome Section -->
+                    <section class="welcome-section">
+                        <h2>Motion Vocabulary for Outlook Designers</h2>
+                        <p class="welcome-subtitle">
+                            Learn professional motion terms, copy AI-ready prompts, and prototype Outlook animations faster.
+                        </p>
+
+                        <div class="welcome-cards">
+                            <div class="welcome-card">
+                                <span class="welcome-card-icon">📧</span>
+                                <h3>Outlook-Specific Patterns</h3>
+                                <p>From liquid glass headers to email thread expansions - patterns made for Outlook scenarios.</p>
+                            </div>
+                            <div class="welcome-card">
+                                <span class="welcome-card-icon">📋</span>
+                                <h3>SwiftUI & Web Prompts</h3>
+                                <p>Ready-to-paste prompts for iOS, Android, and web. Works with Claude Code and VS Code Copilot.</p>
+                            </div>
+                            <div class="welcome-card">
+                                <span class="welcome-card-icon">🎬</span>
+                                <h3>Interactive Demos</h3>
+                                <p>Live demonstrations with tunable parameters. Perfect for design reviews and prototypes.</p>
+                            </div>
+                        </div>
+
+                        <div class="welcome-audience">
+                            <strong>Built for:</strong> Outlook iOS, iPadOS, Android, and macOS design team
+                        </div>
+                    </section>
+
+                    <!-- Active Filters Display -->
+                    <div class="active-filters" id="active-filters">
+                        <!-- Shows currently active platform/category filters -->
+                    </div>
+
+                    <!-- Pattern Cards Grid -->
+                    <section class="patterns-grid" id="patterns-grid">
+                        <!-- Populated by JavaScript -->
+                    </section>
+                </div>
+
+                <!-- DETAIL VIEW (shown when pattern selected) -->
+                <div id="detail-view" class="view">
+                    <!-- Back Button -->
+                    <button class="back-button" id="back-button">
+                        <span class="back-arrow">←</span>
+                        <span>Back to patterns</span>
+                    </button>
+
+                    <!-- Pattern Detail Content -->
+                    <article class="pattern-detail" id="pattern-detail">
+                        <!-- Populated by JavaScript when pattern is selected -->
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SCRIPTS
+         Load order: tokens first, auto-tint second, demos third, then main app
+         ============================================================ -->
+    <script src="assets/liquid-glass-tokens.js"></script>
+    <script src="assets/auto-tint.js"></script>
+    <script src="assets/demos/demo-registry.js"></script>
+    <script src="assets/demos/navigation.js"></script>
+    <script src="assets/demos/modals.js"></script>
+    <script src="assets/demos/micro.js"></script>
+    <script src="assets/demos/loading.js"></script>
+    <script src="assets/demos/material.js"></script>
+    <script src="assets/demos/ai-panel.js"></script>
+    <script src="assets/demos/outlook.js"></script>
+    <script src="assets/demos/ios-patterns.js"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>
