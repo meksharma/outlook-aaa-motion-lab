@@ -1,10 +1,10 @@
-# Outlook Liquid Glass Simulator
+# Outlook Motion Lab
 
 > A motion vocabulary learning tool for Outlook designers — learn professional motion terms, copy AI-ready prompts, and prototype faster.
 
 ## Open the Prototype
 
-**[Open the Outlook Liquid Glass Simulator](https://meksharma.github.io/outlook-liquid-glass-simulator/)**
+**[Open Outlook Motion Lab](https://meksharma.github.io/outlook-motion-lab/)**
 
 No installation or Microsoft sign-in is required. Open the link in any modern browser, choose a pattern, and use the demo controls to explore its motion.
 
@@ -14,18 +14,18 @@ No installation or Microsoft sign-in is required. Open the link in any modern br
 | --- | --- |
 | Outlook AAA Simulator | [Launch simulator](https://meksharma.github.io/outlook-aaa-simulator/) |
 | Outlook Mobile Prototype | [Launch prototype](https://meksharma.github.io/outlook-mobile/) |
-| Outlook Liquid Glass Simulator | [Explore motion patterns](https://meksharma.github.io/outlook-liquid-glass-simulator/) |
+| Outlook Motion Lab | [Explore motion patterns](https://meksharma.github.io/outlook-motion-lab/) |
 
 ---
 
-![Outlook Liquid Glass Simulator](https://img.shields.io/badge/Platform-iOS%20%7C%20iPadOS%20%7C%20Android%20%7C%20macOS%20%7C%20Web-blue)
+![Outlook Motion Lab](https://img.shields.io/badge/Platform-iOS%20%7C%20iPadOS%20%7C%20Android%20%7C%20macOS%20%7C%20Web-blue)
 ![License](https://img.shields.io/badge/License-Internal-orange)
 
 ---
 
 ## What is this?
 
-Outlook Liquid Glass Simulator is an interactive learning library that helps designers:
+Outlook Motion Lab is an interactive learning library that helps designers:
 
 1. **Learn motion vocabulary** — Professional terms like "spring damping", "matched geometry", and "container transform" that AI tools understand
 2. **Copy AI-ready prompts** — Ready-to-paste prompts for SwiftUI and HTML/CSS/JS that work with Claude Code, VS Code Copilot, and other AI coding assistants
@@ -102,7 +102,7 @@ npx serve .
 ## Project Structure
 
 ```
-outlook-liquid-glass-simulator/
+outlook-motion-lab/
 ├── index.html              # Main entry point
 ├── README.md               # This file
 ├── docs/                   # 📄 Design Documentation

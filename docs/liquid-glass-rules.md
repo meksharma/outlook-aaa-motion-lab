@@ -1,5 +1,5 @@
 # Liquid Glass Motion & Material Rules
-Outlook Liquid Glass Simulator
+Outlook Motion Lab
 
 This document defines the **non-negotiable guardrails** for building motion, transitions,
 and visual effects that align with Apple’s iOS 26 “Liquid Glass” direction.

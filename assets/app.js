@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * OUTLOOK LIQUID GLASS SIMULATOR — Main Application
+ * OUTLOOK MOTION LAB — Main Application
  *
  * This file handles:
  * - Loading patterns from JSON

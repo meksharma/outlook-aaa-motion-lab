@@ -1,9 +1,9 @@
 @echo off
-REM Auto-deployment script for Outlook Liquid Glass Simulator (Windows)
+REM Auto-deployment script for Outlook Motion Lab (Windows)
 REM This script commits and pushes changes to trigger GitHub Pages deployment
 
 echo.
-echo 🚀 Auto-deploying Outlook Liquid Glass Simulator changes...
+echo 🚀 Auto-deploying Outlook Motion Lab changes...
 echo.
 
 REM Change to project directory
