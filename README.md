@@ -2,6 +2,23 @@
 
 > A motion vocabulary learning tool for Outlook designers — learn professional motion terms, copy AI-ready prompts, and prototype faster.
 
+## Open the Prototype
+
+**[Explore the Motion Phrasebook](https://meksharma.github.io/outlook-aaa-motion-lab/)**
+
+No installation or Microsoft sign-in is required. Open the link in any modern browser, choose a pattern, and use the demo controls to explore its motion.
+
+## Public Prototype Directory
+
+| Prototype | Open |
+| --- | --- |
+| Portfolio | [View portfolio](https://meksharma.github.io/portfolio/) |
+| Outlook AAA Simulator | [Launch simulator](https://meksharma.github.io/outlook-aaa-simulator/) |
+| Outlook Mobile Prototype | [Launch prototype](https://meksharma.github.io/outlook-mobile/) |
+| Motion Phrasebook | [Explore motion patterns](https://meksharma.github.io/outlook-aaa-motion-lab/) |
+
+---
+
 ![Motion Phrasebook](https://img.shields.io/badge/Platform-iOS%20%7C%20iPadOS%20%7C%20Android%20%7C%20macOS%20%7C%20Web-blue)
 ![License](https://img.shields.io/badge/License-Internal-orange)
 
