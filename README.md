@@ -12,7 +12,6 @@ No installation or Microsoft sign-in is required. Open the link in any modern br
 
 | Prototype | Open |
 | --- | --- |
-| Portfolio | [View portfolio](https://meksharma.github.io/portfolio/) |
 | Outlook AAA Simulator | [Launch simulator](https://meksharma.github.io/outlook-aaa-simulator/) |
 | Outlook Mobile Prototype | [Launch prototype](https://meksharma.github.io/outlook-mobile/) |
 | Motion Phrasebook | [Explore motion patterns](https://meksharma.github.io/outlook-aaa-motion-lab/) |
