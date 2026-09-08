@@ -21,6 +21,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    if: github.repository == 'gim-home/Outlook_AAA_Motion_Lab'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,6 +38,7 @@ jobs:
 
   # Deployment job
   deploy:
+    if: github.repository == 'gim-home/Outlook_AAA_Motion_Lab'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
