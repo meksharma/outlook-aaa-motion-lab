@@ -5,7 +5,7 @@
 
 ```md
 # Motion Acceptance Checklist
-Outlook_AAA_Motion_Lab
+Outlook Liquid Glass Simulator
 
 Use this checklist to validate any motion, transition, or visual effect
 before considering it “done”.

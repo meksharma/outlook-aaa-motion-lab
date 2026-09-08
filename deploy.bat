@@ -1,9 +1,9 @@
 @echo off
-REM Auto-deployment script for Motion Phrasebook (Windows)
+REM Auto-deployment script for Outlook Liquid Glass Simulator (Windows)
 REM This script commits and pushes changes to trigger GitHub Pages deployment
 
 echo.
-echo 🚀 Auto-deploying Motion Phrasebook changes...
+echo 🚀 Auto-deploying Outlook Liquid Glass Simulator changes...
 echo.
 
 REM Change to project directory

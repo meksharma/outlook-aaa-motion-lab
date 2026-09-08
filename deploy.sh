@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Auto-deployment script for Motion Phrasebook
+# Auto-deployment script for Outlook Liquid Glass Simulator
 # This script commits and pushes changes to trigger GitHub Pages deployment
 
 # Colors for output
@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🚀 Auto-deploying Motion Phrasebook changes...${NC}"
+echo -e "${BLUE}🚀 Auto-deploying Outlook Liquid Glass Simulator changes...${NC}"
 
 # Change to project directory
 cd "$(dirname "$0")"

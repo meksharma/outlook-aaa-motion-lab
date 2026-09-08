@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * MOTION PHRASEBOOK — Main Application
+ * OUTLOOK LIQUID GLASS SIMULATOR — Main Application
  *
  * This file handles:
  * - Loading patterns from JSON
